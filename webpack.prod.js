@@ -126,7 +126,7 @@ module.exports = {
       cssProcessor:require('cssnano')
     }),
     new CleanWebpackPlugin(),
-    new FriendlyErrorsWebpackPlugin()
+    // new FriendlyErrorsWebpackPlugin()
     // new HtmlWebpackExternalsPlugin({
     //   externals: [
     //     {
@@ -154,5 +154,5 @@ module.exports = {
       }
     }
   },
-  stats:'errors-only'
+  // stats:'errors-only'
 }
