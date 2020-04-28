@@ -74,16 +74,17 @@ module.exports = {
     rules:[
       {
         test: /.js$/,
+        include: path.resolve('src'),
         use:[
-          {
-            loader:'thread-loader',
-            options:{
-              workers:3
-            }
-          },
-          'babel-loader',
+          // {
+          //   loader:'thread-loader',
+          //   options:{
+          //     workers:3
+          //   }
+          // },
+          // 'babel-loader',
           // 'eslint-loader'
-          // 'happypack/loader'
+          'happypack/loader'
         ]
       },
       {
@@ -156,9 +157,9 @@ module.exports = {
     //   ],
     // })
     // new BundleAnalyzerPlugin(),
-    // new HappyPack({
-    //   loaders: [ 'babel-loader' ]
-    // })
+    new HappyPack({
+      loaders: [ 'babel-loader' ]
+    }),
     new webpack.DllReferencePlugin({
       manifest: require('./build/library/library.json')
     }),
@@ -182,5 +183,13 @@ module.exports = {
   //     })
   //   ]
   // },
+  resolve:{
+    alias:{
+      'react': path.resolve(__dirname, './node_modules/react/umd/react.production.min.js'),
+      'react-dom':path.resolve(__dirname, './node_modules/react-dom/umd/react-dom.production.min.js')
+    },
+    extensions: ['.js'],
+    mainFields: ['main']
+  },
   // stats:'errors-only'
 }
