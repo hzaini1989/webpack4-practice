@@ -10,7 +10,7 @@ const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin')
 const FriendlyErrorsWebpackPlugin= require('friendly-errors-webpack-plugin')
 const SpeedMeasureWebpackPlugin = require('speed-measure-webpack-plugin')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-
+const HappyPack = require('happypack');
 
 
 const smp = new SpeedMeasureWebpackPlugin()
@@ -62,7 +62,7 @@ const { entry,htmlWebpackPlugin } = setMPA()
 
 
 
-module.exports = smp.wrap({
+module.exports = {
   entry:entry,
   output:{
     path : path.join(__dirname,'dist'),
@@ -74,8 +74,9 @@ module.exports = smp.wrap({
       {
         test: /.js$/,
         use:[
-          'babel-loader',
+          // 'babel-loader',
           // 'eslint-loader'
+          'happypack/loader'
         ]
       },
       {
@@ -132,7 +133,7 @@ module.exports = smp.wrap({
       cssProcessor:require('cssnano')
     }),
     new CleanWebpackPlugin(),
-    // new FriendlyErrorsWebpackPlugin()
+    new FriendlyErrorsWebpackPlugin(),
     // new HtmlWebpackExternalsPlugin({
     //   externals: [
     //     {
@@ -147,7 +148,10 @@ module.exports = smp.wrap({
     //     },
     //   ],
     // })
-    new BundleAnalyzerPlugin()
+    // new BundleAnalyzerPlugin(),
+    new HappyPack({
+      loaders: [ 'babel-loader' ]
+    })
   ].concat(htmlWebpackPlugin),
   optimization: {
     splitChunks:{
@@ -161,5 +165,5 @@ module.exports = smp.wrap({
       }
     }
   },
-  stats:'errors-only'
-})
+  // stats:'errors-only'
+}
