@@ -159,6 +159,9 @@ module.exports = {
     // new HappyPack({
     //   loaders: [ 'babel-loader' ]
     // })
+    new webpack.DllReferencePlugin({
+      manifest: require('./build/library/library.json')
+    })
   ].concat(htmlWebpackPlugin),
   optimization: {
     splitChunks:{
