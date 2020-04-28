@@ -11,6 +11,7 @@ const FriendlyErrorsWebpackPlugin= require('friendly-errors-webpack-plugin')
 const SpeedMeasureWebpackPlugin = require('speed-measure-webpack-plugin')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const HappyPack = require('happypack');
+const TerserPlugin = require('terser-webpack-plugin');
 
 
 const smp = new SpeedMeasureWebpackPlugin()
@@ -169,7 +170,12 @@ module.exports = {
           minChunks:2
         }
       }
-    }
+    },
+    minimizer:[
+      new TerserPlugin({
+        parallel:true
+      })
+    ]
   },
   // stats:'errors-only'
 }
