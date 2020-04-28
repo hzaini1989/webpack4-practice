@@ -12,7 +12,7 @@ const SpeedMeasureWebpackPlugin = require('speed-measure-webpack-plugin')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const HappyPack = require('happypack');
 const TerserPlugin = require('terser-webpack-plugin');
-
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
 const smp = new SpeedMeasureWebpackPlugin()
 
@@ -161,25 +161,26 @@ module.exports = {
     // })
     new webpack.DllReferencePlugin({
       manifest: require('./build/library/library.json')
-    })
+    }),
+    new HardSourceWebpackPlugin()
   ].concat(htmlWebpackPlugin),
-  optimization: {
-    splitChunks:{
-      minSize:0,
-      cacheGroups :{
-        commons:{
-          name:'common',
-          chunks:'all',
-          minChunks:2
-        }
-      }
-    },
-    minimizer:[
-      new TerserPlugin({
-        parallel:true,
-        cache: true
-      })
-    ]
-  },
+  // optimization: {
+  //   splitChunks:{
+  //     minSize:0,
+  //     cacheGroups :{
+  //       commons:{
+  //         name:'common',
+  //         chunks:'all',
+  //         minChunks:2
+  //       }
+  //     }
+  //   },
+  //   minimizer:[
+  //     new TerserPlugin({
+  //       parallel:true,
+  //       cache: true
+  //     })
+  //   ]
+  // },
   // stats:'errors-only'
 }

@@ -10,7 +10,7 @@
     "dev": "webpack-dev-server --config webpack.dev.js --open",
     "build:ssr": "webpack --config webpack.ssr.js",
     "build:stats": "webpack --config webpack.prod.js --json > stats.json",
-    "dll":"webpack --config webpack.dll.js"
+    "dll": "webpack --config webpack.dll.js"
   },
   "keywords": [],
   "author": "",
@@ -38,6 +38,7 @@
     "friendly-errors-webpack-plugin": "^1.7.0",
     "glob": "^7.1.6",
     "happypack": "^5.0.1",
+    "hard-source-webpack-plugin": "^0.13.1",
     "html-webpack-externals-plugin": "^3.8.0",
     "html-webpack-plugin": "^4.2.0",
     "less": "^3.11.1",
