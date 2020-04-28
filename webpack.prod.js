@@ -74,9 +74,15 @@ module.exports = {
       {
         test: /.js$/,
         use:[
-          // 'babel-loader',
+          {
+            loader:'thread-loader',
+            options:{
+              workers:3
+            }
+          },
+          'babel-loader',
           // 'eslint-loader'
-          'happypack/loader'
+          // 'happypack/loader'
         ]
       },
       {
@@ -149,9 +155,9 @@ module.exports = {
     //   ],
     // })
     // new BundleAnalyzerPlugin(),
-    new HappyPack({
-      loaders: [ 'babel-loader' ]
-    })
+    // new HappyPack({
+    //   loaders: [ 'babel-loader' ]
+    // })
   ].concat(htmlWebpackPlugin),
   optimization: {
     splitChunks:{
